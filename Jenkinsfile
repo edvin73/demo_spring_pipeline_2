@@ -40,11 +40,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
+                echo "Deploying to server: ${DEV_SERVER}"
+                echo "Using JAR file: ${JAR_FILE}"
+                echo "Deploy path: ${DEPLOY_PATH}"
                 // sh 'scp target/demo-0.0.1-SNAPSHOT.jar liv@frp014:/users/liv/edvin/delivery/app/'
                     // ssh -tt user@${DEV_SERVER} 'pkill -f ${APP_NAME}.jar || true'
                     // ssh user@${DEV_SERVER} 'nohup java -jar ${DEPLOY_PATH}/${APP_NAME}.jar --spring.profiles.active=prod > ${DEPLOY_PATH}/app.log 2>&1 &'
                 sh """
-                    ssh -tt ${USER}@${DEV_SERVER}  
+                    ssh ${USER}@${DEV_SERVER}  
                     scp ${JAR_FILE} ${USER}@${DEV_SERVER}:${DEPLOY_PATH}
                 """
 
