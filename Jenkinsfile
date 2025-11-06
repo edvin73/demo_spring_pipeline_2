@@ -5,7 +5,7 @@ pipeline {
         APP_NAME = "demo-0.0.1-SNAPSHOT"
         JAR_FILE = "target/${APP_NAME}.jar"
         DEV_SERVER = "frp014"
-        USER=liv
+        USER='liv'
         DEPLOY_PATH = "/users/liv/edvin/delivery/app"  
     }
 
