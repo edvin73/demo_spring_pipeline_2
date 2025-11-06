@@ -45,7 +45,7 @@ pipeline {
                     // ssh user@${DEV_SERVER} 'nohup java -jar ${DEPLOY_PATH}/${APP_NAME}.jar --spring.profiles.active=prod > ${DEPLOY_PATH}/app.log 2>&1 &'
                 sh """
                     ssh ${USER}@${DEV_SERVER}  
-                    scp ${JAgR_FILE} ${USER}@${DEV_SERVER}:${DEPLOY_PATH}
+                    scp ${JAR_FILE} ${USER}@${DEV_SERVER}:${DEPLOY_PATH}
                 """
 
                 echo 'Application deployed successfully.' 
