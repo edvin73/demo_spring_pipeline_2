@@ -48,10 +48,7 @@ pipeline {
                     scp ${JAgR_FILE} ${USER}@${DEV_SERVER}:${DEPLOY_PATH}
                 """
 
-                echo 'Application deployed successfully.'
-
-
-                // Add your deploy steps here
+                echo 'Application deployed successfully.' 
             }
         }
     }
