@@ -1,6 +1,14 @@
 pipeline {
     agent any
 
+     environment {
+        APP_NAME = "springboot-demo"
+        JAR_FILE = "target/${APP_NAME}.jar"
+        DEV_SERVER = "frp014" 
+        DEPLOY_PATH = "/users/liv/edvin/delivery/app/${APP_NAME}"  
+    }
+
+
     tools {
         maven 'Maven' 
     }
@@ -31,6 +39,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
+                // sh 'scp target/demo-0.0.1-SNAPSHOT.jar liv@frp014:/users/liv/edvin/delivery/app/'
+                    // ssh user@${DEV_SERVER} 'pkill -f ${APP_NAME}.jar || true'
+                    // ssh user@${DEV_SERVER} 'nohup java -jar ${DEPLOY_PATH}/${APP_NAME}.jar --spring.profiles.active=prod > ${DEPLOY_PATH}/app.log 2>&1 &'
+                sh """
+                    ssh user@${DEV_SERVER}  
+                    scp ${JAR_FILE} user@${DEV_SERVER}:${DEPLOY_PATH}/${APP_NAME}.jar
+                """
+
                 // Add your deploy steps here
             }
         }
